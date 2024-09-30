@@ -1,18 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MainController;
+use App\Http\Controllers\StudentController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [MainController::class, 'show'])->name('home');
 
 
-Route::get('/first', function () {
-    $a = 1; // переменная 1
-    $b = 2; // переменная 2
-    $c = $a + $b; // сумма
-    // dd($c);
+Route::get('/first',[MainController::class, 'first'] )->name('first');
 
-    // return view('first');
-    return view('first', compact('c')); // переменная должна называться точно также, только без доллара и строка
-});
+
+Route::get('/students', [StudentController::class, 'index'])->name('students.index');
