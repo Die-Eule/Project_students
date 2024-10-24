@@ -8,6 +8,12 @@
                 <p><a href="{{route('students.show', $student->id)}}">{{ $student->lname }}</a></p>
                 <p>{{ $student->fname }}</p>
                 <p>{{ $student->age }}</p>
+                @isset($student->user->email)
+                    <p>{{ $student->user->email }}</p>
+                @endisset
+                @isset($student->group->title)
+                    <p>{{ $student->group->title }}</p>
+                @endisset
                 <form method='POST' action="{{route('students.destroy', $student->id)}}">
                     @method('delete')
                     @csrf
@@ -59,6 +65,14 @@
         <div>
             <label for="age" class="block mb-2 text-sm font-medium text-gray-900">Возраст</label>
             <input type="number" name="age" id="age" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="18" required />
+        </div>
+        <div>
+            <label for="group" class="block mb-2 text-sm font-medium text-gray-900">Группа</label>
+            <select name="group_id" id="group" class="block apperance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline text-gray-900">
+                @foreach($groups as $group)
+                <option value="{{ $group->id }}">{{ $group->title }}</option>
+                @endforeach
+            </select>
         </div>
     </div>
     <div class="flex items-start mb-6">

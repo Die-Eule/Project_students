@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Group;
 use Illuminate\Http\Request;
 use App\Models\Student;
 
@@ -10,7 +11,9 @@ class StudentController extends Controller
     public function index() {
         $students = Student::paginate(10);
 
-        return view('students.index', compact('students'));
+        $groups = Group::all();
+
+        return view('students.index', compact('students', 'groups'));
     }
 
     public function destroy(Student $student){
@@ -23,14 +26,16 @@ class StudentController extends Controller
         $data = $request -> validate([
             'fname'=>'string',
             'lname'=>'string',
-            'age'=>'integer'
+            'age'=>'integer',
+            'group_id'=>''
         ]);
         $student->create($data);
         return redirect()->back();
     }
 
     public function show(Student $student) {
-        return view('students.show',compact('student'));
+        $groups = Group::all();
+        return view('students.show',compact('student', 'groups'));
     }
 
     public function update(Request $request, Student $student) 
@@ -38,7 +43,8 @@ class StudentController extends Controller
         $data = $request -> validate([
             'fname'=>'string',
             'lname'=>'string',
-            'age'=>'integer'
+            'age'=>'integer',
+            'group_id'=>''
         ]);
         $student->update($data);
         return redirect()->back();
