@@ -12,4 +12,10 @@ class GroupController extends Controller
         $groups = Group::all();
         return view('groups.index', compact('groups'));
     }
+
+    public function indexAdult()
+    {
+        $groups = Group::all();
+        return view('groups.index2', compact('groups'));
+    }
 }

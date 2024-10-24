@@ -10,7 +10,7 @@
                 <p class="font-bold">Фамилия</p>
                 <p class="font-bold">Имя</p>
                 <p class="font-bold">Возраст</p>
-                @foreach($group->students as $student)
+                @foreach($group->adultStudents as $student)
                         <img class="size-20" src="{{ $student->path_img }}" alt="{{ $student->lname }}">
                         <p>
                             <a href="{{ route('students.show', $student->id) }}">
