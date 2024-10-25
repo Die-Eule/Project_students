@@ -5,6 +5,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\SubjectController;
+use Mockery\Matcher\Subset;
 
 // Route::get('/', [MainController::class, 'show'])->name('home');
 // Route::get('/first',[MainController::class, 'first'] )->name('first');
@@ -34,6 +36,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/groups', [GroupController::class, 'index'])->name('groups.index');
 
     Route::get('/groups/adults', [GroupController::class, 'indexAdult'])->name('groups.index2');
+
+    Route::get('/subjects', [SubjectController::class, 'index'])->name('subjects.index');
     });
 
 require __DIR__.'/auth.php';
