@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Middleware\Admin;
 use Mockery\Matcher\Subset;
 
 // Route::get('/', [MainController::class, 'show'])->name('home');
@@ -38,6 +39,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/groups/adults', [GroupController::class, 'indexAdult'])->name('groups.index2');
 
     Route::get('/subjects', [SubjectController::class, 'index'])->name('subjects.index');
+    });
+
+    Route::middleware(Admin::class)->group(function(){
+        Route::get('/admin', function(){
+            return view('admin.index');
+        })->name('admin.index');
     });
 
 require __DIR__.'/auth.php';
